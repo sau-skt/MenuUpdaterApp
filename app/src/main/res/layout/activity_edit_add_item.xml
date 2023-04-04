@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditAddItemActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/ty"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100dp"
+            android:src="@drawable/rounded_button"
+            android:scaleType="centerCrop"/>
+
+        <EditText
+            android:id="@+id/ActivityEditItemItemNametv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ty"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:hint="Item Name"/>
+
+        <EditText
+            android:id="@+id/ActivityEditItemItemDesctv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ActivityEditItemItemNametv"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:hint="Item Description"/>
+
+        <EditText
+            android:id="@+id/ActivityEditItemItemPricetv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ActivityEditItemItemDesctv"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:inputType="number"
+            android:hint="Item Price"/>
+
+        <EditText
+            android:id="@+id/ActivityEditItemItemCategorytv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ActivityEditItemItemPricetv"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:hint="Item Category"/>
+
+        <RadioGroup
+            android:id="@+id/ActivityEditItemRadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/ActivityEditItemItemCategorytv">
+
+            <RadioButton
+                android:id="@+id/vegeterian"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Veg"
+                android:textSize="15sp"
+                android:checked="true"/>
+
+            <RadioButton
+                android:id="@+id/non_vegetarian"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Non Veg"
+                android:textSize="15sp"
+                android:checked="false"/>
+
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/ActivityEditItemSendMeCsv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_button"
+            android:layout_above="@+id/ActivityEditItemBulkUpload"
+            android:layout_marginBottom="10dp"
+            android:textAllCaps="false"
+            android:text="Send Me CSV File"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:textColor="@color/white"/>
+
+        <Button
+            android:id="@+id/ActivityEditItemBulkUpload"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_button"
+            android:layout_above="@+id/ActivityEditItemSavebtn"
+            android:layout_marginBottom="10dp"
+            android:textAllCaps="false"
+            android:text="Bulk Update from CSV"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/white"/>
+
+        <Button
+            android:id="@+id/ActivityEditItemSavebtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_button"
+            android:text="@string/savebtn"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"/>
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

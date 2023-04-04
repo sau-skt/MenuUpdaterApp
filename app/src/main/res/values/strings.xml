@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Menu Updater</string>
+
+    <!-- Activity Main -->
+    <string name="loginbutton">Login</string>
+    <string name="forgotpasswordbutton">Forgot Password</string>
+    <string name="additembutton">Add Item</string>
+    <string name="savebtn">Save</string>
+</resources>
