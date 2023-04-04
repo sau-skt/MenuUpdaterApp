@@ -94,6 +94,7 @@ public class FoodMenuEditActivity extends AppCompatActivity {
                     intent.putExtra("visibility","2");
                 } else {
                     intent.putExtra("itemId", String.valueOf(1));
+                    intent.putExtra("visibility","2");
                 }
                 intent.putExtra("username", username);
                 startActivity(intent);
