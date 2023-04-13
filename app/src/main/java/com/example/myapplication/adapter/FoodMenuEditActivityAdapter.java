@@ -24,7 +24,7 @@ public class FoodMenuEditActivityAdapter extends RecyclerView.Adapter<FoodMenuEd
     ArrayList<String> itemNameList, itemDescList, itemIdList;
     ArrayList<String> itemPriceList, itemTypeList, itemCategoryList;
     String username;
-    DatabaseReference databaseReference;
+    DatabaseReference databaseReference,cxdatabasereference;
 
     Context context;
     ArrayList<String> daysArrayList = new ArrayList<>();
@@ -78,7 +78,9 @@ public class FoodMenuEditActivityAdapter extends RecyclerView.Adapter<FoodMenuEd
             @Override
             public void onClick(View view) {
                 databaseReference = FirebaseDatabase.getInstance().getReference("SIDMenu").child(username).child(itemIdList.get(position));
+                cxdatabasereference = FirebaseDatabase.getInstance().getReference("SIDCxMenu").child(username).child(itemCategoryList.get(position)).child(itemIdList.get(position));
                 databaseReference.removeValue();
+                cxdatabasereference.removeValue();
             }
         });
 
