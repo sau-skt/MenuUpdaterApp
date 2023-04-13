@@ -58,7 +58,7 @@ public class EditAddItemActivity extends AppCompatActivity {
     ArrayList<String> itemDescList = new ArrayList<>();
     ArrayList<String> itemTypeList = new ArrayList<>();
     ArrayList<String> itemCategoryList = new ArrayList<>();
-    DatabaseReference databaseReference, csvdatabasereference;
+    DatabaseReference databaseReference, csvdatabasereference, cxdatabasereference;
     RadioGroup radioGroup;
     RadioButton radioButton;
     StorageReference storageReference, csvRef;
@@ -95,6 +95,7 @@ public class EditAddItemActivity extends AppCompatActivity {
         itemcategory.setText(itemCategory);
         databaseReference = FirebaseDatabase.getInstance().getReference("SIDMenu").child(username).child(itemId);
         csvdatabasereference = FirebaseDatabase.getInstance().getReference("SIDMenu").child(username);
+        cxdatabasereference = FirebaseDatabase.getInstance().getReference("SIDCxMenu").child(username);
         storageReference = FirebaseStorage.getInstance().getReference();
         csvRef = storageReference.child(username + ".csv");
 
@@ -118,6 +119,12 @@ public class EditAddItemActivity extends AppCompatActivity {
                     int selectedId = radioGroup.getCheckedRadioButtonId();
                     radioButton = findViewById(selectedId);
                     databaseReference.child("itemtype").setValue(radioButton.getText());
+                    cxdatabasereference.child(itemcategory.getText().toString()).child(itemId).child("itemId").setValue(itemId);
+                    cxdatabasereference.child(itemcategory.getText().toString()).child(itemId).child("itemname").setValue(itemname.getText().toString());
+                    cxdatabasereference.child(itemcategory.getText().toString()).child(itemId).child("itemdescription").setValue(itemdesc.getText().toString());
+                    cxdatabasereference.child(itemcategory.getText().toString()).child(itemId).child("itemprice").setValue(itemprice.getText().toString());
+                    cxdatabasereference.child(itemcategory.getText().toString()).child(itemId).child("itemcategory").setValue(itemcategory.getText().toString());
+                    cxdatabasereference.child(itemcategory.getText().toString()).child(itemId).child("itemtype").setValue(radioButton.getText());
                     finish();
                 } else {
                     Toast.makeText(EditAddItemActivity.this, "Fill all the values first", Toast.LENGTH_SHORT).show();
@@ -217,8 +224,15 @@ public class EditAddItemActivity extends AppCompatActivity {
                         try {
                             while ((nextRecord = csvReader.readNext()) != null) {
                                 for (int i = 0; i < headers.length; i++) {
-                                    String value = nextRecord[i];
                                     csvdatabasereference.child(nextRecord[0]).child(headers[i]).setValue(nextRecord[i]);
+                                    if (i == 5) {
+                                        cxdatabasereference.child(nextRecord[5]).child(nextRecord[0]).child(headers[0]).setValue(nextRecord[0]);
+                                        cxdatabasereference.child(nextRecord[5]).child(nextRecord[0]).child(headers[1]).setValue(nextRecord[1]);
+                                        cxdatabasereference.child(nextRecord[5]).child(nextRecord[0]).child(headers[2]).setValue(nextRecord[2]);
+                                        cxdatabasereference.child(nextRecord[5]).child(nextRecord[0]).child(headers[3]).setValue(nextRecord[3]);
+                                        cxdatabasereference.child(nextRecord[5]).child(nextRecord[0]).child(headers[4]).setValue(nextRecord[4]);
+                                        cxdatabasereference.child(nextRecord[5]).child(nextRecord[0]).child(headers[5]).setValue(nextRecord[5]);
+                                    }
                                 }
                             }
                         } catch (IOException e) {
