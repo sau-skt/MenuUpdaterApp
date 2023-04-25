@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("SID");
+        databaseReference = FirebaseDatabase.getInstance().getReference("SID");
         loginbtn = findViewById(R.id.activity_main_login_btn);
         user = findViewById(R.id.activity_main_user);
         pass = findViewById(R.id.activity_main_password);
