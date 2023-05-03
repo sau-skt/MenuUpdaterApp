@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                             String password = sidSnapshot.child("password").getValue(String.class);
                             if (user.getText().toString().equals(username) && pass.getText().toString().equals(password)){
                                 Toast.makeText(MainActivity.this, "Welcome to your store - " + username, Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(MainActivity.this, FoodMenuEditActivity.class);
+                                Intent intent = new Intent(MainActivity.this, OptionActivity.class);
                                 intent.putExtra("username",username);
                                 startActivity(intent);
                                 break;
