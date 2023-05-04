@@ -28,5 +28,14 @@ public class OptionActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        updatetax.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(OptionActivity.this, UpdateTaxActivity.class);
+                intent.putExtra("username",username);
+                startActivity(intent);
+            }
+        });
     }
 }

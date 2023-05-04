@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddTaxInfoActivity">
+
+    <TextView
+        android:id="@+id/qwe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter Tax Name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        android:textColor="@color/black"/>
+
+    <EditText
+        android:id="@+id/tax_name_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/qwe"
+        android:layout_margin="10dp"/>
+
+    <TextView
+        android:id="@+id/rty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tax_name_edittext"
+        android:text="Enter Tax Percent"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:layout_centerHorizontal="true"/>
+
+    <EditText
+        android:id="@+id/tax_percent_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rty"
+        android:layout_margin="10dp"/>
+
+    <Button
+        android:id="@+id/tax_info_save_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_button"
+        android:text="Save"
+        android:textColor="@color/white"
+        android:layout_below="@id/tax_percent_edittext"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>

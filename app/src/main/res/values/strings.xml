@@ -6,4 +6,5 @@
     <string name="forgotpasswordbutton">Forgot Password</string>
     <string name="additembutton">Add Item</string>
     <string name="savebtn">Save</string>
+    <string name="title_activity_add_tax_info">AddTaxInfoActivity</string>
 </resources>
