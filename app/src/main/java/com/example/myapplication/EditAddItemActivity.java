@@ -125,6 +125,7 @@ public class EditAddItemActivity extends AppCompatActivity {
                     cxdatabasereference.child(itemcategory.getText().toString()).child(itemId).child("itemprice").setValue(itemprice.getText().toString());
                     cxdatabasereference.child(itemcategory.getText().toString()).child(itemId).child("itemcategory").setValue(itemcategory.getText().toString());
                     cxdatabasereference.child(itemcategory.getText().toString()).child(itemId).child("itemtype").setValue(radioButton.getText());
+                    cxdatabasereference.child(itemcategory.getText().toString()).child(itemId).child("instock").setValue("true");
                     finish();
                 } else {
                     Toast.makeText(EditAddItemActivity.this, "Fill all the values first", Toast.LENGTH_SHORT).show();
@@ -232,6 +233,7 @@ public class EditAddItemActivity extends AppCompatActivity {
                                         cxdatabasereference.child(nextRecord[5]).child(nextRecord[0]).child(headers[3]).setValue(nextRecord[3]);
                                         cxdatabasereference.child(nextRecord[5]).child(nextRecord[0]).child(headers[4]).setValue(nextRecord[4]);
                                         cxdatabasereference.child(nextRecord[5]).child(nextRecord[0]).child(headers[5]).setValue(nextRecord[5]);
+                                        cxdatabasereference.child(nextRecord[5]).child(nextRecord[0]).child("instock").setValue("true");
                                     }
                                 }
                             }
