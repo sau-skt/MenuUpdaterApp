@@ -41,4 +41,16 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"/>
 
+    <Button
+        android:id="@+id/view_tables"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:text="View Tables"
+        android:background="@drawable/rounded_button"
+        android:padding="10dp"
+        android:layout_below="@id/stockout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"/>
+
 </RelativeLayout>
