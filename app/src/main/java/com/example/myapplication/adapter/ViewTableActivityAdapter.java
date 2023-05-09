@@ -37,8 +37,11 @@ public class ViewTableActivityAdapter extends RecyclerView.Adapter<ViewTableActi
         holder.tableno.setText(tableid.get(position));
         if (availibility.get(position).equals("true")) {
             holder.cardView.setCardBackgroundColor(Color.parseColor("#90EE90"));
-        } else {
+        } else { if (availibility.get(position).equals("false")) {
             holder.cardView.setCardBackgroundColor(Color.parseColor("#FF0000"));
+        } else {
+            holder.cardView.setCardBackgroundColor(Color.parseColor("#FFFF00"));
+        }
         }
     }
 
