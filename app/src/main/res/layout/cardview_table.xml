@@ -27,7 +27,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/table_id_tv"
         android:textSize="12sp"
-        android:text="Collect Payment"
         android:layout_centerHorizontal="true"
         android:textColor="@color/black"
         android:textStyle="bold"

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -24,6 +25,7 @@ public class ViewTableActivity extends AppCompatActivity {
     ArrayList<String> availibility = new ArrayList<>();
     ArrayList<String> invoicenumber = new ArrayList<>();
     ArrayList<String> tableid = new ArrayList<>();
+    ArrayList<String> totalamount = new ArrayList<>();
     RecyclerView recyclerView;
     RecyclerView.Adapter adapter;
     TextView addtable;
@@ -36,7 +38,7 @@ public class ViewTableActivity extends AppCompatActivity {
         tablereference = FirebaseDatabase.getInstance().getReference("TableInfo").child(username);
         recyclerView = findViewById(R.id.view_table_recyclerview);
         addtable = findViewById(R.id.add_table);
-        adapter = new ViewTableActivityAdapter(availibility,invoicenumber,tableid);
+        adapter = new ViewTableActivityAdapter(availibility,invoicenumber,tableid, totalamount, username);
         recyclerView.setAdapter(adapter);
 
         tablereference.addValueEventListener(new ValueEventListener() {
@@ -45,13 +47,16 @@ public class ViewTableActivity extends AppCompatActivity {
                 availibility.clear();
                 invoicenumber.clear();
                 tableid.clear();
+                totalamount.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     String avail = dataSnapshot.child("availibility").getValue(String.class);
                     String inv = dataSnapshot.child("invoicenumber").getValue(String.class);
                     String tid = dataSnapshot.child("tableid").getValue(String.class);
+                    String tamt = dataSnapshot.child("totalamount").getValue(String.class);
                     availibility.add(avail);
                     invoicenumber.add(inv);
                     tableid.add(tid);
+                    totalamount.add(tamt);
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -84,11 +89,13 @@ public class ViewTableActivity extends AppCompatActivity {
                             tablereference.child(String.valueOf(tableno)).child("availibility").setValue("true");
                             tablereference.child(String.valueOf(tableno)).child("invoicenumber").setValue("0");
                             tablereference.child(String.valueOf(tableno)).child("tableid").setValue(String.valueOf(tableno));
+                            tablereference.child(String.valueOf(tableno)).child("totalamount").setValue("0");
                         } else {
                             int tableno = Integer.parseInt(tableid.get(tableid.size()-1)) + 1;
                             tablereference.child(String.valueOf(tableno)).child("availibility").setValue("true");
                             tablereference.child(String.valueOf(tableno)).child("invoicenumber").setValue("0");
                             tablereference.child(String.valueOf(tableno)).child("tableid").setValue(String.valueOf(tableno));
+                            tablereference.child(String.valueOf(tableno)).child("totalamount").setValue("0");
                         }
 
                     }
