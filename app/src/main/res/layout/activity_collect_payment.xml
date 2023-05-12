@@ -13,7 +13,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
         android:textSize="40sp"
-        android:text="Total - 1000"
         android:textStyle="bold"
         android:textColor="@color/black"/>
 

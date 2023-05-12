@@ -157,7 +157,7 @@ public class CancelOrderActivity extends AppCompatActivity {
                                 String inv = snapshot.child("invoicenumber").getValue(String.class);
                                 int invamt = Integer.parseInt(inv) - 1;
                                 SIDreference.child("invoicenumber").setValue(String.valueOf(invamt));
-                                cxorderreference.child(invoicenumber).removeValue();
+                                cxorderreference.child(invoicenumber).child("order_status").setValue("Cancelled");
                                 tablereference.child("availibility").setValue("true");
                                 tablereference.child("invoicenumber").setValue("0");
                                 tablereference.child("totalamount").setValue("0");
