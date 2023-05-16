@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 public class CancelOrderActivity extends AppCompatActivity {
     String username, tableId, invoicenumber;
-    DatabaseReference tablereference, cxorderreference, SIDreference;
+    DatabaseReference tablereference, cxorderreference, SIDreference, kdsreference;
     TextView total, calculation, item_name_list, item_qty_list, item_price_list, invoicenumbertv, datetv;
     ArrayList<String> ItemNameList = new ArrayList<>();
     ArrayList<String> ItemQtyList = new ArrayList<>();
@@ -44,6 +44,7 @@ public class CancelOrderActivity extends AppCompatActivity {
         tablereference = FirebaseDatabase.getInstance().getReference("TableInfo").child(username).child(tableId);
         cxorderreference = FirebaseDatabase.getInstance().getReference("CxOrder").child(username);
         SIDreference = FirebaseDatabase.getInstance().getReference("SID").child(username);
+        kdsreference = FirebaseDatabase.getInstance().getReference("KDSItems").child(username);
         total.append("\n\nSub-Total\n");
 
         tablereference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -158,6 +159,8 @@ public class CancelOrderActivity extends AppCompatActivity {
                                 int invamt = Integer.parseInt(inv) - 1;
                                 SIDreference.child("invoicenumber").setValue(String.valueOf(invamt));
                                 cxorderreference.child(invoicenumber).child("order_status").setValue("Cancelled");
+                                kdsreference.child(invoicenumber).removeValue();
+                                kdsreference.child("change").setValue("true");
                                 tablereference.child("availibility").setValue("true");
                                 tablereference.child("invoicenumber").setValue("0");
                                 tablereference.child("totalamount").setValue("0");
