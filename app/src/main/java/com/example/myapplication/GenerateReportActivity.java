@@ -116,9 +116,12 @@ public class GenerateReportActivity extends AppCompatActivity {
                                                             String invsubtotal = snapshot.child("invoicesubtotal").getValue(String.class);
                                                             String invtotal = snapshot.child("invoicetotal").getValue(String.class);
                                                             String ordstatus = snapshot.child("order_status").getValue(String.class);
+                                                            int index = invsubtotal.indexOf("Total ");
                                                             csvData.append(invoiceDate + ",");
                                                             csvData.append(inno + ",");
-                                                            csvData.append(invsubtotal + ",");
+                                                            if (index != 1) {
+                                                                csvData.append(invsubtotal.substring(index + 6) + ",");
+                                                            }
                                                             csvData.append(invtotal + ",");
                                                             csvData.append(ordstatus + "\n");
                                                         }
