@@ -15,6 +15,9 @@
         android:theme="@style/Theme.MenuUpdater"
         tools:targetApi="31">
         <activity
+            android:name=".GenerateReportActivity"
+            android:exported="false" />
+        <activity
             android:name=".CancelOrderActivity"
             android:exported="false" />
         <activity

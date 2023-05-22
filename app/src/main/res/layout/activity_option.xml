@@ -1,56 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".OptionActivity">
 
-    <Button
-        android:id="@+id/update_menu_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_button"
-        android:text="Update Menu"
-        android:textColor="@color/white"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="200dp"
-        android:padding="10dp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/update_tax"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:text="Update Tax"
-        android:background="@drawable/rounded_button"
-        android:padding="10dp"
-        android:layout_below="@id/update_menu_btn"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"/>
+        <Button
+            android:id="@+id/update_menu_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100dp"
+            android:background="@drawable/rounded_button"
+            android:padding="10dp"
+            android:text="Update Menu"
+            android:textColor="@color/white" />
 
-    <Button
-        android:id="@+id/stockout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:text="Stock Out"
-        android:background="@drawable/rounded_button"
-        android:padding="10dp"
-        android:layout_below="@id/update_tax"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"/>
+        <Button
+            android:id="@+id/update_tax"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/update_menu_btn"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100dp"
+            android:background="@drawable/rounded_button"
+            android:padding="10dp"
+            android:text="Update Tax"
+            android:textColor="@color/white" />
 
-    <Button
-        android:id="@+id/view_tables"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:text="View Tables"
-        android:background="@drawable/rounded_button"
-        android:padding="10dp"
-        android:layout_below="@id/stockout"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"/>
+        <Button
+            android:id="@+id/stockout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/update_tax"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100dp"
+            android:background="@drawable/rounded_button"
+            android:padding="10dp"
+            android:text="Stock Out"
+            android:textColor="@color/white" />
 
-</RelativeLayout>
+        <Button
+            android:id="@+id/view_tables"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/stockout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100dp"
+            android:background="@drawable/rounded_button"
+            android:padding="10dp"
+            android:text="View Tables"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/generate_sales_report"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/view_tables"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100dp"
+            android:background="@drawable/rounded_button"
+            android:padding="10dp"
+            android:text="Generate Report"
+            android:textColor="@color/white" />
+
+    </RelativeLayout>
+
+</ScrollView>

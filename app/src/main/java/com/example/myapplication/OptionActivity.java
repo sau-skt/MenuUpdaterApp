@@ -10,7 +10,7 @@ import android.widget.Button;
 public class OptionActivity extends AppCompatActivity {
 
     String username;
-    Button updatemenu, updatetax, stockout, viewtables;
+    Button updatemenu, updatetax, stockout, viewtables, generatereport;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +20,7 @@ public class OptionActivity extends AppCompatActivity {
         updatetax = findViewById(R.id.update_tax);
         stockout = findViewById(R.id.stockout);
         viewtables = findViewById(R.id.view_tables);
+        generatereport = findViewById(R.id.generate_sales_report);
         username = getIntent().getStringExtra("username");
 
         updatemenu.setOnClickListener(new View.OnClickListener() {
@@ -53,6 +54,15 @@ public class OptionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(OptionActivity.this, ViewTableActivity.class);
+                intent.putExtra("username",username);
+                startActivity(intent);
+            }
+        });
+
+        generatereport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(OptionActivity.this, GenerateReportActivity.class);
                 intent.putExtra("username",username);
                 startActivity(intent);
             }
