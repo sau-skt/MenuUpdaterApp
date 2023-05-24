@@ -14,20 +14,25 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.CSVWriter;
@@ -61,7 +66,9 @@ public class EditAddItemActivity extends AppCompatActivity {
     DatabaseReference databaseReference, csvdatabasereference, cxdatabasereference;
     RadioGroup radioGroup;
     RadioButton radioButton;
-    StorageReference storageReference, csvRef;
+    StorageReference storageReference, csvRef, itemimageref;
+    ImageView itemimage;
+    Uri imageuri;
 
 
     @Override
@@ -76,6 +83,7 @@ public class EditAddItemActivity extends AppCompatActivity {
         itemdesc = findViewById(R.id.ActivityEditItemItemDesctv);
         Savebtn = findViewById(R.id.ActivityEditItemSavebtn);
         itemcategory = findViewById(R.id.ActivityEditItemItemCategorytv);
+        itemimage = findViewById(R.id.item_image);
         itemIdList = getIntent().getStringArrayListExtra("itemIdList");
         itemNameList = getIntent().getStringArrayListExtra("itemNameList");
         itemPriceList = getIntent().getStringArrayListExtra("itemPriceList");
@@ -98,6 +106,7 @@ public class EditAddItemActivity extends AppCompatActivity {
         cxdatabasereference = FirebaseDatabase.getInstance().getReference("SIDCxMenu").child(username);
         storageReference = FirebaseStorage.getInstance().getReference();
         csvRef = storageReference.child(username + ".csv");
+        itemimageref = storageReference.child(username).child(itemId + ".jpg");
 
         if (Vis.equals("1")){
             GetCSV.setVisibility(View.INVISIBLE);
@@ -129,6 +138,27 @@ public class EditAddItemActivity extends AppCompatActivity {
                     finish();
                 } else {
                     Toast.makeText(EditAddItemActivity.this, "Fill all the values first", Toast.LENGTH_SHORT).show();
+                }
+                if (imageuri != null) {
+                    UploadTask uploadTask = itemimageref.putFile(imageuri);
+                    uploadTask.addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(EditAddItemActivity.this, "An error occured while uploading image...", Toast.LENGTH_SHORT).show();
+                        }
+                    }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            itemimageref.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Uri> task) {
+                                    String itemimageUrl=task.getResult().toString();
+                                    databaseReference.child("itemimage").setValue(itemimageUrl);
+                                    cxdatabasereference.child(itemcategory.getText().toString()).child(itemId).child("itemimage").setValue(itemimageUrl);
+                                }
+                            });
+                        }
+                    });
                 }
             }
         });
@@ -199,6 +229,14 @@ public class EditAddItemActivity extends AppCompatActivity {
 
             }
         });
+
+        itemimage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+                startActivityForResult(gallery, 2);
+            }
+        });
     }
 
     @Override
@@ -247,6 +285,11 @@ public class EditAddItemActivity extends AppCompatActivity {
                         Toast.makeText(EditAddItemActivity.this, "Failed to upload CSV file.", Toast.LENGTH_SHORT).show();
                         // Handle failed upload
                     });
+        }
+
+        if (requestCode == 2 && resultCode == RESULT_OK && data != null){
+            imageuri = data.getData();
+            itemimage.setImageURI(imageuri);
         }
     }
 }

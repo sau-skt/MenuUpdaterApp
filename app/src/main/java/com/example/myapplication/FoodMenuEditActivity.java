@@ -30,6 +30,7 @@ public class FoodMenuEditActivity extends AppCompatActivity {
     ArrayList<String> itemIdList = new ArrayList<>();
     ArrayList<String> itemTypeList = new ArrayList<>();
     ArrayList<String> itemCategoryList = new ArrayList<>();
+    ArrayList<String> itemimageurllist = new ArrayList<>();
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.Adapter adapter;
@@ -44,7 +45,7 @@ public class FoodMenuEditActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(FoodMenuEditActivity.this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-        adapter = new FoodMenuEditActivityAdapter(itemNameList,itemPriceList,itemDescList,itemIdList,itemTypeList,itemCategoryList,username,FoodMenuEditActivity.this);
+        adapter = new FoodMenuEditActivityAdapter(itemNameList,itemPriceList,itemDescList,itemIdList,itemTypeList,itemCategoryList,itemimageurllist,username,FoodMenuEditActivity.this);
         recyclerView.setAdapter(adapter);
         databaseReference = FirebaseDatabase.getInstance().getReference("SIDMenu").child(username);
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -56,6 +57,7 @@ public class FoodMenuEditActivity extends AppCompatActivity {
                 itemDescList.clear();
                 itemTypeList.clear();
                 itemCategoryList.clear();
+                itemimageurllist.clear();
                 for (DataSnapshot sidSnapshot : dataSnapshot.getChildren()) {
                     String itemid = sidSnapshot.getKey();
                     String itemName = sidSnapshot.child("itemname").getValue(String.class);
@@ -63,12 +65,14 @@ public class FoodMenuEditActivity extends AppCompatActivity {
                     String itemPrice = sidSnapshot.child("itemprice").getValue(String.class);
                     String itemType = sidSnapshot.child("itemtype").getValue(String.class);
                     String itemCategory = sidSnapshot.child("itemcategory").getValue(String.class);
+                    String itemImage = sidSnapshot.child("itemimage").getValue(String.class);
                     itemNameList.add(itemName);
                     itemDescList.add(itemDesc);
                     itemPriceList.add(itemPrice);
                     itemIdList.add(itemid);
                     itemTypeList.add(itemType);
                     itemCategoryList.add(itemCategory);
+                    itemimageurllist.add(itemImage);
                 }
                 adapter.notifyDataSetChanged();
             }

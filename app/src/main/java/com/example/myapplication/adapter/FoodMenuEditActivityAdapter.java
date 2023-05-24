@@ -2,6 +2,7 @@ package com.example.myapplication.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +17,13 @@ import com.example.myapplication.EditAddItemActivity;
 import com.example.myapplication.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 public class FoodMenuEditActivityAdapter extends RecyclerView.Adapter<FoodMenuEditActivityAdapter.MyViewHolder> {
 
-    ArrayList<String> itemNameList, itemDescList, itemIdList;
+    ArrayList<String> itemNameList, itemDescList, itemIdList, itemimageurllist;
     ArrayList<String> itemPriceList, itemTypeList, itemCategoryList;
     String username;
     DatabaseReference databaseReference,cxdatabasereference;
@@ -29,7 +31,7 @@ public class FoodMenuEditActivityAdapter extends RecyclerView.Adapter<FoodMenuEd
     Context context;
     ArrayList<String> daysArrayList = new ArrayList<>();
 
-    public FoodMenuEditActivityAdapter(ArrayList<String> itemNameList,ArrayList<String> itemPriceList,ArrayList<String> itemDescList,ArrayList<String> itemIdList,ArrayList<String> itemTypeList,ArrayList<String> itemCategoryList, String username, Context context) {
+    public FoodMenuEditActivityAdapter(ArrayList<String> itemNameList,ArrayList<String> itemPriceList,ArrayList<String> itemDescList,ArrayList<String> itemIdList,ArrayList<String> itemTypeList,ArrayList<String> itemCategoryList, ArrayList<String> itemimageurllist, String username, Context context) {
         this.itemNameList = itemNameList;
         this.itemDescList = itemDescList;
         this.itemPriceList = itemPriceList;
@@ -38,6 +40,7 @@ public class FoodMenuEditActivityAdapter extends RecyclerView.Adapter<FoodMenuEd
         this.username = username;
         this.itemIdList = itemIdList;
         this.itemTypeList = itemTypeList;
+        this.itemimageurllist = itemimageurllist;
     }
 
     @NonNull
@@ -55,6 +58,9 @@ public class FoodMenuEditActivityAdapter extends RecyclerView.Adapter<FoodMenuEd
         holder.ItemPrice.setText("\u20B9 " + itemPriceList.get(position));
         holder.itemCategory.setText(itemCategoryList.get(position));
         holder.ItemId.setText(itemIdList.get(position));
+        if (itemimageurllist.get(position) != null) {
+            Picasso.get().load(itemimageurllist.get(position)).into(holder.itemimage);
+        }
         if (itemTypeList.get(position).equals("Veg")) {
             holder.itemtypebtn.setImageResource(R.drawable.vegetarian_food);
         } else {
@@ -95,9 +101,10 @@ public class FoodMenuEditActivityAdapter extends RecyclerView.Adapter<FoodMenuEd
 
         TextView ItemName, ItemDesc, ItemPrice, ItemId, itemCategory;
         CardView cardView;
-        ImageView deletebtn, itemtypebtn;
+        ImageView deletebtn, itemtypebtn, itemimage;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            itemimage = itemView.findViewById(R.id.item_image);
             ItemName = itemView.findViewById(R.id.itemname);
             ItemDesc = itemView.findViewById(R.id.itemdesc);
             ItemPrice = itemView.findViewById(R.id.itemprice);
