@@ -98,7 +98,7 @@ public class GenerateReportActivity extends AppCompatActivity {
                         LocalDate startDate = LocalDate.parse(startdatetv.getText().toString(), dateFormatter);
                         LocalDate endDate = LocalDate.parse(enddatetv.getText().toString(), dateFormatter);
 
-                        csvData.append("InvoiceDate, InvoiceNumber, SubTotal, Total, OrderStatus\n");
+                        csvData.append("InvoiceDate, InvoiceNumber, SubTotal, Total, OrderStatus, Taxes\n");
 
                         if (startDate.isBefore(endDate) || startDate.isEqual(endDate)) {
                                 cxorderreference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -123,7 +123,8 @@ public class GenerateReportActivity extends AppCompatActivity {
                                                                 csvData.append(invsubtotal.substring(index + 6) + ",");
                                                             }
                                                             csvData.append(invtotal + ",");
-                                                            csvData.append(ordstatus + "\n");
+                                                            csvData.append(ordstatus + ",");
+                                                            csvData.append(String.valueOf(Float.parseFloat(invtotal) - Float.parseFloat(invsubtotal.substring(index + 6))) + "\n");
                                                         }
                                                     }
                                                     File dir = getApplicationContext().getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS);
