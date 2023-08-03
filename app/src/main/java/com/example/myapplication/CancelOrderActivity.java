@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 public class CancelOrderActivity extends AppCompatActivity {
     String username, tableId, invoicenumber;
-    DatabaseReference tablereference, cxorderreference, SIDreference, kdsreference;
+    DatabaseReference tablereference, cxorderreference, SIDreference, kdsreference, invreference;
     TextView total, calculation, item_name_list, item_qty_list, item_price_list, invoicenumbertv, datetv;
     ArrayList<String> ItemNameList = new ArrayList<>();
     ArrayList<String> ItemQtyList = new ArrayList<>();
@@ -41,6 +41,7 @@ public class CancelOrderActivity extends AppCompatActivity {
         invoicenumbertv = findViewById(R.id.invoice_number_textview);
         datetv = findViewById(R.id.invoice_date_textview);
         cancelorderbtn = findViewById(R.id.cancel_order_btn);
+        invreference = FirebaseDatabase.getInstance().getReference().child("SID").child(username).child("invoicenumber");
         tablereference = FirebaseDatabase.getInstance().getReference("TableInfo").child(username).child(tableId);
         cxorderreference = FirebaseDatabase.getInstance().getReference("CxOrder").child(username);
         SIDreference = FirebaseDatabase.getInstance().getReference("SID").child(username);
@@ -152,6 +153,7 @@ public class CancelOrderActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         invoicenumber = snapshot.child("invoicenumber").getValue(String.class);
+                        invreference.setValue(String.valueOf(Integer.valueOf(invoicenumber)+2));
                         SIDreference.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
